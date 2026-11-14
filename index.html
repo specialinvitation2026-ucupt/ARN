@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#fff6f7"><title>A Little Invitation</title>
+<style>
+:root{--rose:#bf6682;--ink:#40343a;--muted:#806e75;--line:#f0dce2;--paper:#fff;--bg:#fff6f7}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 12% 8%,#ffe5ed 0,transparent 32%),radial-gradient(circle at 88% 85%,#fbe7ee 0,transparent 30%),var(--bg);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);display:grid;place-items:center;padding:22px}
+main{width:min(100%,540px);background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:26px;padding:30px 25px;box-shadow:0 20px 60px #a9597216}
+.flower{text-align:center;font-size:34px}.eyebrow{text-align:center;letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:var(--rose);font-weight:700;margin-top:8px}
+h1{text-align:center;font-family:Georgia,serif;font-weight:500;font-size:clamp(32px,8vw,43px);margin:10px 0;color:#92506a}
+.intro{text-align:center;color:var(--muted);line-height:1.65;margin:0 auto 25px;max-width:390px}
+label,.legend{display:block;font-weight:650;font-size:14px;margin:19px 0 9px}.field,select,input[type=date]{width:100%;font:inherit;color:var(--ink);border:1px solid var(--line);border-radius:13px;background:#fff;padding:13px 14px;min-height:49px}
+fieldset{border:0;padding:0;margin:0}.choices{display:grid;gap:9px}.choice{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff;font-size:14px;cursor:pointer}.choice:has(input:checked){border-color:#c77a94;background:#fff5f8}.choice input{accent-color:var(--rose);width:17px;height:17px}
+button{width:100%;border:0;border-radius:14px;background:var(--rose);color:#fff;font:inherit;font-weight:700;padding:15px;margin-top:23px;cursor:pointer;box-shadow:0 8px 18px #bf668233}button:disabled{opacity:.55;cursor:not-allowed}
+.small{text-align:center;font-size:11px;line-height:1.5;color:#927f86;margin-top:14px}.sign{text-align:center;font:italic 19px Georgia,serif;color:#a25d77;margin-top:22px}.notice{display:none;margin-top:14px;color:#9b405e;font-size:13px;text-align:center}
+@media(max-width:420px){main{padding:25px 18px;border-radius:22px}}
+</style>
+</head>
+<body>
+<main>
+<div class="flower" aria-hidden="true">💌</div><div class="eyebrow">A little note for you</div>
+<h1>Would you like to go on a date?</h1>
+<p class="intro">It would be lovely to spend some time together. Choose a place, a date idea and a day that work for you.</p>
+<form id="inviteForm" action="https://formsubmit.co/special.invitation2026@gmail.com" method="POST">
+<input type="hidden" name="_subject" value="A date invitation response">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_captcha" value="true">
+<input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+<fieldset><legend class="legend">1. Where would you prefer to go?</legend><div class="choices">
+<label class="choice"><input type="radio" name="Preferred location" value="Pune" required> Pune</label>
+<label class="choice"><input type="radio" name="Preferred location" value="Bengaluru"> Bengaluru</label>
+<label class="choice"><input type="radio" name="Preferred location" value="Uttara Kannada"> Uttara Kannada</label>
+<label class="choice"><input type="radio" name="Preferred location" value="Other location (see text below)" id="otherLocation"> Somewhere else</label>
+<input class="field" type="text" id="customLocation" name="Other preferred location" placeholder="Type your preferred place (optional)" maxlength="100" style="margin-top:9px" aria-label="Type another preferred location">
+</div></fieldset>
+<fieldset><legend class="legend">2. What kind of date sounds nice?</legend><div class="choices">
+<label class="choice"><input type="radio" name="Date type" value="Coffee and conversation" required> ☕ Coffee and conversation</label>
+<label class="choice"><input type="radio" name="Date type" value="Dinner date"> 🍽️ Dinner date</label>
+<label class="choice"><input type="radio" name="Date type" value="A long drive by bike or car"> 🚗 A long drive (by bike or car)</label>
+<label class="choice"><input type="radio" name="Date type" value="Nature walk"> 🌳 A peaceful nature walk</label>
+<label class="choice"><input type="radio" name="Date type" value="Something meaningful together"> ❤️ Something meaningful together</label>
+</div></fieldset>
+<label for="date">3. Which date would suit you?</label>
+<input class="field" type="date" id="date" name="Preferred date" required>
+<button id="submit" type="submit">Send my response ❤️</button>
+<p class="small">Your choices will be shared with the invitation organiser.</p>
+<p class="notice" id="notice">Please choose a location, a date style and a date.</p>
+</form>
+<div class="sign">Your well-wisher ❤️</div>
+</main>
+<script>
+const d=document.getElementById('date');
+const otherLocation=document.getElementById('otherLocation');
+const customLocation=document.getElementById('customLocation');
+customLocation.addEventListener('focus',()=>{otherLocation.checked=true});
+const today=new Date(); const local=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10); d.min=local;
+d.addEventListener('change',()=>{if(d.value && d.value<local)d.value=local});
+document.getElementById('inviteForm').addEventListener('submit',e=>{if(!e.currentTarget.reportValidity())e.preventDefault()});
+</script>
+</body></html>
